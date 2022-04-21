@@ -687,8 +687,10 @@ MonoBehaviour:
   isFacingLeft: 0
   isGrounded: 0
   limitAirJumps: 1
-  maxJumps: 3
-  jumpForce: 250
+  maxJumps: 1
+  jumpForce: 150
+  holdForce: 150
+  buttonHoldTime: 0.25
   distanceToCollider: 0.05
   maxJumpSpeed: 10
   maxFallSpeed: -10
