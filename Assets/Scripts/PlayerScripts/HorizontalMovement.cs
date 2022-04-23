@@ -59,6 +59,7 @@ namespace PeteMetroidvania
         {
             if(MovementPressed())
             {
+                anim.SetBool("Walking", true);
                 acceleration = maxSpeed / timeTillMaxSpeed;
                 runTime += Time.deltaTime;
                 currentSpeed = horizonatalInput * acceleration * runTime;
@@ -67,6 +68,7 @@ namespace PeteMetroidvania
             }
             else
             {
+                anim.SetBool("Walking", false);
                 acceleration = 0; 
                 runTime = 0;
                 currentSpeed = 0;
@@ -108,10 +110,13 @@ namespace PeteMetroidvania
 
         protected virtual void SpeedMultiplier()
         {
-            if(SprintingHeld())
-            {           
+            if (SprintingHeld())
+            {
+                anim.SetBool("Sprinting", true);
                 currentSpeed *= sprintMultiplier;
             }
+            else
+                anim.SetBool("Sprinting", false);
         }
 
     }

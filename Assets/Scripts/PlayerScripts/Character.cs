@@ -15,6 +15,8 @@ public class Character : MonoBehaviour
         protected Collider2D col;
         protected Rigidbody2D rb;
 
+        protected Animator anim;
+
         private Vector2 facingLeft;
 
     // Start is called before the first frame update
@@ -27,6 +29,7 @@ public class Character : MonoBehaviour
     {
             col = GetComponent<Collider2D>();
             rb = GetComponent<Rigidbody2D>();
+             anim = GetComponent<Animator>();
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
     }
 
