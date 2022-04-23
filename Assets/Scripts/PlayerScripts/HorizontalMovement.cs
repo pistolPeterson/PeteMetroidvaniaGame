@@ -59,7 +59,7 @@ namespace PeteMetroidvania
         {
             if(MovementPressed())
             {
-                anim.SetBool("Walking", true);
+                anim.SetBool("Moving", true);
                 acceleration = maxSpeed / timeTillMaxSpeed;
                 runTime += Time.deltaTime;
                 currentSpeed = horizonatalInput * acceleration * runTime;
@@ -68,12 +68,13 @@ namespace PeteMetroidvania
             }
             else
             {
-                anim.SetBool("Walking", false);
+                anim.SetBool("Moving", false);
                 acceleration = 0; 
                 runTime = 0;
                 currentSpeed = 0;
             }
             SpeedMultiplier();
+            anim.SetFloat("CurrentSpeed", currentSpeed);
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
         }
 
@@ -112,11 +113,11 @@ namespace PeteMetroidvania
         {
             if (SprintingHeld())
             {
-                anim.SetBool("Sprinting", true);
+               
                 currentSpeed *= sprintMultiplier;
             }
-            else
-                anim.SetBool("Sprinting", false);
+            
+                
         }
 
     }

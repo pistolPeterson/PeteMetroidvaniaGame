@@ -54,6 +54,7 @@ namespace PeteMetroidvania
                 numOfJumpsLeft--;
                 if(numOfJumpsLeft >= 0)
                 {
+                    rb.velocity = new Vector2(rb.velocity.x, 0);
                     jumpCountDown = buttonHoldTime;
                     isJumping = true;
                 }
@@ -89,7 +90,7 @@ namespace PeteMetroidvania
             
             if(isJumping)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
+               
                 rb.AddForce(Vector2.up * jumpForce );
                 AdditionalAir();
             }
@@ -120,11 +121,13 @@ namespace PeteMetroidvania
         {
             if(CollisionCheck(Vector2.down, distanceToCollider, collisionLayer) && !isJumping)
             {
+                anim.SetBool("IsGrounded", true);
                 character.isGrounded = true;
                 numOfJumpsLeft = maxJumps;
             }
             else
             {
+                anim.SetBool("IsGrounded", false);
                 character.isGrounded = false;
             
                 if(Falling(0) && rb.velocity.y < maxFallSpeed)
@@ -132,7 +135,7 @@ namespace PeteMetroidvania
                     rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
                 }
             }
-               
+            anim.SetFloat("VerticalSpeed", rb.velocity.y);
         }
 
     }
