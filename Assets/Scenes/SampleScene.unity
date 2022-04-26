@@ -998,7 +998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1070327661323342165, guid: 5756ac29d11ca3646bd4b83191de8f69, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.825502
+      value: 0.8255018
       objectReference: {fileID: 0}
     - target: {fileID: -1070327661323342165, guid: 5756ac29d11ca3646bd4b83191de8f69, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1006,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1070327661323342165, guid: 5756ac29d11ca3646bd4b83191de8f69, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.56439924
+      value: 0.5643995
       objectReference: {fileID: 0}
     - target: {fileID: -1070327661323342165, guid: 5756ac29d11ca3646bd4b83191de8f69, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1022,7 +1022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -867258915580717402, guid: 5756ac29d11ca3646bd4b83191de8f69, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.41461173
+      value: 0.41461194
       objectReference: {fileID: 0}
     - target: {fileID: -867258915580717402, guid: 5756ac29d11ca3646bd4b83191de8f69, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1030,7 +1030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -867258915580717402, guid: 5756ac29d11ca3646bd4b83191de8f69, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.9099984
+      value: 0.90999836
       objectReference: {fileID: 0}
     - target: {fileID: -867258915580717402, guid: 5756ac29d11ca3646bd4b83191de8f69, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1287,6 +1287,8 @@ MonoBehaviour:
   maxJumpSpeed: 5
   maxFallSpeed: -10
   acceptedFallSpeed: -5
+  glideTime: 1.5
+  gravity: 0.5
   collisionLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1345,7 +1347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481605623}
   m_LocalRotation: {x: -0, y: -0, z: -0.68978155, w: 0.72401756}
-  m_LocalPosition: {x: 1.24989, y: 2.3407059, z: 0}
+  m_LocalPosition: {x: 1.24989, y: 2.340706, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 654678072}
@@ -1374,7 +1376,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687913073}
-  m_LocalRotation: {x: -0, y: -0, z: -0.0024268625, w: 0.99999714}
+  m_LocalRotation: {x: -0, y: -0, z: -0.002426952, w: 0.99999714}
   m_LocalPosition: {x: 4.94, y: -0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1435,7 +1437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820571626}
   m_LocalRotation: {x: -0, y: -0, z: 0.5833494, w: -0.8122214}
-  m_LocalPosition: {x: -3.197266, y: 7.3400717, z: 0}
+  m_LocalPosition: {x: -3.197266, y: 7.340072, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 537043311}
@@ -1769,6 +1771,8 @@ MonoBehaviour:
   maxJumpSpeed: 10
   maxFallSpeed: -10
   acceptedFallSpeed: -5
+  glideTime: 0
+  gravity: 0
   collisionLayer:
     serializedVersion: 2
     m_Bits: 256

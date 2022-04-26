@@ -15,16 +15,21 @@ namespace PeteMetroidvania
         [SerializeField] protected float maxJumpSpeed;
         [SerializeField] protected float maxFallSpeed;
         [SerializeField] protected float acceptedFallSpeed;
+        [SerializeField] protected float glideTime;
+        [SerializeField][Range(-2.2f, 2.2f)] protected float gravity;
         [SerializeField] protected LayerMask collisionLayer;
 
         private bool isJumping;
         private float jumpCountDown;
+        private float fallCountDown;
         private int numOfJumpsLeft;
 
         protected override void Initialization()
         {
             base.Initialization();
             numOfJumpsLeft = maxJumps;
+            jumpCountDown = buttonHoldTime;
+            fallCountDown = glideTime;
         }
 
 
@@ -57,6 +62,7 @@ namespace PeteMetroidvania
                     rb.velocity = new Vector2(rb.velocity.x, 0);
                     jumpCountDown = buttonHoldTime;
                     isJumping = true;
+                    fallCountDown = glideTime;  
                 }
 
               
@@ -82,6 +88,7 @@ namespace PeteMetroidvania
         protected virtual void FixedUpdate()
         {
             IsJumping();
+            Gliding();
             GroundCheck();
         }
 
@@ -100,6 +107,24 @@ namespace PeteMetroidvania
                 rb.velocity = new Vector2(rb.velocity.x, maxJumpSpeed); 
             }
         }
+
+        protected virtual void Gliding()
+        {
+            if(Falling(0) && JumpHeld())
+            {
+                fallCountDown -= Time.deltaTime;
+                if(fallCountDown > 0 && rb.velocity.y > acceptedFallSpeed)
+                {
+                    anim.SetBool("Gliding", true);
+
+                    FallSpeed(gravity);
+                    return;
+                }
+            }
+            anim.SetBool("Gliding", false);
+
+        }
+
         protected virtual void AdditionalAir()
         {
             if (JumpHeld())
@@ -124,6 +149,7 @@ namespace PeteMetroidvania
                 anim.SetBool("IsGrounded", true);
                 character.isGrounded = true;
                 numOfJumpsLeft = maxJumps;
+                fallCountDown = glideTime;
             }
             else
             {
