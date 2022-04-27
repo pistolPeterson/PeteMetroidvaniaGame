@@ -8,6 +8,7 @@ namespace PeteMetroidvania
         [SerializeField] protected float timeTillMaxSpeed;
         [SerializeField] protected float maxSpeed;
         [SerializeField] protected float sprintMultiplier;
+        [SerializeField] protected float crouchSpeedMultiplier;
         private float acceleration;
         private float currentSpeed;
         private float horizonatalInput;
@@ -117,6 +118,10 @@ namespace PeteMetroidvania
                 currentSpeed *= sprintMultiplier;
             }
             
+            if(character.isCrouching)
+            {
+                currentSpeed *= crouchSpeedMultiplier;
+            }
                 
         }
 
