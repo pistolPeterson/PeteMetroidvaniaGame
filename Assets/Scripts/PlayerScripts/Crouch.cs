@@ -9,7 +9,8 @@ namespace PeteMetroidvania
     {
         [SerializeField]
         [Range(0, 1)]
-        protected float colliderMultiplier; 
+        protected float colliderMultiplier;
+        [SerializeField] protected LayerMask layers;
         private CapsuleCollider2D playerCollider;
         private Vector2 originalCollider;
         private Vector2 crouchingColliderSize;
@@ -58,6 +59,10 @@ namespace PeteMetroidvania
 
                 if(character.isCrouching)
                 {
+                    if(CollisionCheck(Vector2.up, playerCollider.size.y *0.25f, layers))
+                    {
+                        return;
+                    }
                     StartCoroutine(CrouchDisabled());
                 }
                
