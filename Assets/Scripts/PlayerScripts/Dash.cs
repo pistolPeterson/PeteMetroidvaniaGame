@@ -5,8 +5,11 @@ using UnityEngine;
 
 namespace PeteMetroidvania
 {
+    [RequireComponent(typeof(CapsuleCollider2D))]
     public class Dash : Abilities
     {
+       
+
 
         [SerializeField] protected float dashForce; 
 
@@ -17,7 +20,7 @@ namespace PeteMetroidvania
 
         private bool canDash;
         private float dashCountDown;
-
+        private CapsuleCollider2D capsuleCollider2D;
 
         // Start is called before the first frame update
         void Start()
@@ -28,6 +31,7 @@ namespace PeteMetroidvania
         protected override void Initialization()
         {
             base.Initialization();
+            capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         }
 
         // Update is called once per frame
@@ -52,6 +56,9 @@ namespace PeteMetroidvania
         {
             dashCountDown = dashCooldownTime;
             character.isDashing = true;
+            capsuleCollider2D.direction = CapsuleDirection2D.Horizontal;
+            capsuleCollider2D.size = new Vector2(capsuleCollider2D.size.y, capsuleCollider2D.size.x);
+            anim.SetBool("Dashing", true);
             StartCoroutine(FinishedDashing());
         }
 
@@ -113,6 +120,9 @@ namespace PeteMetroidvania
         protected virtual IEnumerator FinishedDashing()
         {
             yield return new WaitForSeconds(dashAmountTime);
+            capsuleCollider2D.direction = CapsuleDirection2D.Vertical;
+            capsuleCollider2D.size = new Vector2(capsuleCollider2D.size.y, capsuleCollider2D.size.x);
+            anim.SetBool("Dashing", false);
             character.isDashing = false;
             FallSpeed(1);
             movement.enabled = true;
