@@ -15,12 +15,15 @@ public class Character : MonoBehaviour
         public bool isCrouching;
         [HideInInspector]
         public bool isDashing;
+        [HideInInspector]
+        public bool isWallsliding;
 
         protected Collider2D col;
         protected Rigidbody2D rb;
 
         protected Animator anim;
         protected HorizontalMovement movement;
+        protected Jump jump;
         private Vector2 facingLeft;
 
     // Start is called before the first frame update
@@ -35,6 +38,7 @@ public class Character : MonoBehaviour
             rb = GetComponent<Rigidbody2D>();
             movement = GetComponent<HorizontalMovement>();
             anim = GetComponent<Animator>();
+             jump = GetComponent<Jump>();
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
     }
 

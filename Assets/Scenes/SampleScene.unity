@@ -1320,17 +1320,21 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallsliding: 0
   limitAirJumps: 1
   maxJumps: 1
   jumpForce: 200
   holdForce: 150
   buttonHoldTime: 0.25
   distanceToCollider: 0.05
+  horizontalWallJumpForce: 50
+  vertialWallJumpForce: 50
   maxJumpSpeed: 5
   maxFallSpeed: -10
   acceptedFallSpeed: -5
   glideTime: 1.5
   gravity: 0.5
+  wallJumpTime: 0.5
   collisionLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1350,6 +1354,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallsliding: 0
   timeTillMaxSpeed: 0.75
   maxSpeed: 6
   sprintMultiplier: 2
@@ -1370,6 +1375,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallsliding: 0
 --- !u!114 &1282215566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1386,6 +1392,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallsliding: 0
   colliderMultiplier: 0.53
   layers:
     serializedVersion: 2
@@ -1406,6 +1413,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallsliding: 0
   dashForce: 125
   dashCooldownTime: 1.5
   dashAmountTime: 0.4
@@ -1931,6 +1939,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallsliding: 0
 --- !u!114 &1974855071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1947,6 +1956,7 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallsliding: 0
   timeTillMaxSpeed: 0.4
   maxSpeed: 7.5
   sprintMultiplier: 1.5
@@ -1967,17 +1977,21 @@ MonoBehaviour:
   isGrounded: 0
   isCrouching: 0
   isDashing: 0
+  isWallsliding: 0
   limitAirJumps: 1
   maxJumps: 1
   jumpForce: 150
   holdForce: 150
   buttonHoldTime: 0.25
   distanceToCollider: 0.05
+  horizontalWallJumpForce: 0
+  vertialWallJumpForce: 0
   maxJumpSpeed: 10
   maxFallSpeed: -10
   acceptedFallSpeed: -5
   glideTime: 0
   gravity: 0
+  wallJumpTime: 0
   collisionLayer:
     serializedVersion: 2
     m_Bits: 256

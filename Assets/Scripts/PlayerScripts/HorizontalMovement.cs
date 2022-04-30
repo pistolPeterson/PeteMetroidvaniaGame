@@ -26,7 +26,7 @@ namespace PeteMetroidvania
             SprintingHeld();
         }
 
-        protected virtual bool MovementPressed()
+        public virtual bool MovementPressed()
         {
             if(Input.GetAxis("Horizontal") != 0)
             {
@@ -121,6 +121,12 @@ namespace PeteMetroidvania
             if(character.isCrouching)
             {
                 currentSpeed *= crouchSpeedMultiplier;
+            }
+
+            if(!character.isFacingLeft && CollisionCheck(Vector2.right, .05f, jump.collisionLayer) || character.isFacingLeft && CollisionCheck(Vector2.left, .05f, jump.collisionLayer))
+            {
+                currentSpeed = .01f; 
+
             }
                 
         }

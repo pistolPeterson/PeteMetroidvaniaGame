@@ -12,14 +12,19 @@ namespace PeteMetroidvania
         [SerializeField] protected float holdForce;
         [SerializeField] protected float buttonHoldTime;
         [SerializeField] protected float distanceToCollider;
+        [SerializeField] protected float horizontalWallJumpForce;
+        [SerializeField] protected float verticalWallJumpForce;
         [SerializeField] protected float maxJumpSpeed;
         [SerializeField] protected float maxFallSpeed;
         [SerializeField] protected float acceptedFallSpeed;
         [SerializeField] protected float glideTime;
         [SerializeField][Range(-2.2f, 2.2f)] protected float gravity;
-        [SerializeField] protected LayerMask collisionLayer;
+
+        [SerializeField] protected float wallJumpTime;
+        public LayerMask collisionLayer;
 
         private bool isJumping;
+        private bool isWallJumping;
         private float jumpCountDown;
         private float fallCountDown;
         private int numOfJumpsLeft;
@@ -30,6 +35,7 @@ namespace PeteMetroidvania
             numOfJumpsLeft = maxJumps;
             jumpCountDown = buttonHoldTime;
             fallCountDown = glideTime;
+            
         }
 
 
@@ -56,6 +62,13 @@ namespace PeteMetroidvania
                     isJumping = false;
                     return false;
                 }
+
+                if(character.isWallsliding)
+                {
+                    isWallsliding = true;
+                    return false;
+                }
+
                 numOfJumpsLeft--;
                 if(numOfJumpsLeft >= 0)
                 {
@@ -90,6 +103,8 @@ namespace PeteMetroidvania
             IsJumping();
             Gliding();
             GroundCheck();
+            WallSliding();
+            WallJump();
         }
 
         protected virtual void IsJumping()
@@ -164,6 +179,58 @@ namespace PeteMetroidvania
             anim.SetFloat("VerticalSpeed", rb.velocity.y);
         }
 
+        protected virtual bool WallCheck()
+        {
+            if((!character.isFacingLeft && CollisionCheck(Vector2.right, distanceToCollider, collisionLayer) || character.isFacingLeft && CollisionCheck(Vector2.left, distanceToCollider, collisionLayer)) && movement.MovementPressed() && !character.isGrounded)
+            {
+                return true; 
+            }
+            return false;
+        }
+
+        protected virtual bool WallSliding()
+        {
+            if(WallCheck())
+            {
+                FallSpeed(gravity);
+                character.isWallsliding = true;
+                return true;
+            }
+            else
+            {
+                character.isWallsliding = false;
+                return false;
+            }
+        }
+
+        protected virtual void WallJump()
+        {
+            if(isWallJumping)
+            {
+                rb.AddForce( Vector2.up* verticalWallJumpForce);
+
+                if(!character.isFacingLeft )
+                {
+                    rb.AddForce(Vector2.left * horizontalWallJumpForce);
+                }
+
+                if (character.isFacingLeft)
+                {
+                    rb.AddForce(Vector2.right * horizontalWallJumpForce);
+                }
+
+                StartCoroutine(WallJumped());
+            }
+        }
+
+
+        protected virtual IEnumerator WallJumped()
+        {
+            movement.enabled = false;
+            yield return new WaitForSeconds(wallJumpTime);
+            movement.enabled = true;
+            isWallJumping = false;
+        }
     }
 }
 
