@@ -25,6 +25,7 @@ namespace PeteMetroidvania
 
         private bool isJumping;
         private bool isWallJumping;
+        private bool flipped; 
         private float jumpCountDown;
         private float fallCountDown;
         private int numOfJumpsLeft;
@@ -42,13 +43,13 @@ namespace PeteMetroidvania
         // Update is called once per frame
         protected virtual void Update()
         {
-            JumpPressed();
-            JumpHeld();
+            CheckForJump();
+           
         }
 
-        protected virtual bool JumpPressed()
+        protected virtual bool CheckForJump()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(input.JumpPressed())
             {
 
                 if (!character.isGrounded && numOfJumpsLeft == maxJumps)
@@ -66,6 +67,7 @@ namespace PeteMetroidvania
                 if(character.isWallsliding)
                 {
                     isWallsliding = true;
+                    isWallJumping = true;
                     return false;
                 }
 
@@ -88,15 +90,7 @@ namespace PeteMetroidvania
             }
         }
 
-        protected virtual bool JumpHeld()
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                return true;
-            }
-            else 
-                return false;
-        }
+       
 
         protected virtual void FixedUpdate()
         {
@@ -125,7 +119,7 @@ namespace PeteMetroidvania
 
         protected virtual void Gliding()
         {
-            if(Falling(0) && JumpHeld())
+            if(Falling(0) && input.JumpHeld())
             {
                 fallCountDown -= Time.deltaTime;
                 if(fallCountDown > 0 && rb.velocity.y > acceptedFallSpeed)
@@ -142,7 +136,7 @@ namespace PeteMetroidvania
 
         protected virtual void AdditionalAir()
         {
-            if (JumpHeld())
+            if (input.JumpHeld())
             {
                 jumpCountDown -= Time.deltaTime;
                 if (jumpCountDown <= 0)
@@ -183,6 +177,7 @@ namespace PeteMetroidvania
         {
             if((!character.isFacingLeft && CollisionCheck(Vector2.right, distanceToCollider, collisionLayer) || character.isFacingLeft && CollisionCheck(Vector2.left, distanceToCollider, collisionLayer)) && movement.MovementPressed() && !character.isGrounded)
             {
+              
                 return true; 
             }
             return false;
@@ -192,13 +187,26 @@ namespace PeteMetroidvania
         {
             if(WallCheck())
             {
+
+                if(!flipped)
+                {
+                    Flip();
+                    flipped = true;
+                }
                 FallSpeed(gravity);
                 character.isWallsliding = true;
+                anim.SetBool("WallSliding", true);
                 return true;
             }
             else
             {
                 character.isWallsliding = false;
+                anim.SetBool("WallSliding", false);
+                if(flipped && !isWallJumping)
+                {
+                    Flip();
+                    flipped= false;
+                }
                 return false;
             }
         }

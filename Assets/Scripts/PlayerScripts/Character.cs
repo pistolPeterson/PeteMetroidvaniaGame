@@ -24,6 +24,9 @@ public class Character : MonoBehaviour
         protected Animator anim;
         protected HorizontalMovement movement;
         protected Jump jump;
+
+        protected InputManager input;
+
         private Vector2 facingLeft;
 
     // Start is called before the first frame update
@@ -40,16 +43,17 @@ public class Character : MonoBehaviour
             anim = GetComponent<Animator>();
              jump = GetComponent<Jump>();
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
+            input = GetComponent<InputManager>();
     }
 
 
         protected virtual void Flip()
         {
-            if(isFacingLeft)
+            if(isFacingLeft || (!isFacingLeft && isWallsliding))
             {
                 transform.localScale = facingLeft;
             }
-            else
+             if(!isFacingLeft || (isFacingLeft && isWallsliding))
             {
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
             }

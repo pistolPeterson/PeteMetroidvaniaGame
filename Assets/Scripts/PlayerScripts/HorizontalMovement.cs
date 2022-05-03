@@ -23,7 +23,7 @@ namespace PeteMetroidvania
         protected virtual void Update()
         {
             MovementPressed();
-            SprintingHeld();
+           
         }
 
         public virtual bool MovementPressed()
@@ -39,17 +39,7 @@ namespace PeteMetroidvania
             }
         }
 
-        protected virtual bool SprintingHeld()
-        {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        
 
         protected virtual void FixedUpdate()
         {
@@ -112,7 +102,7 @@ namespace PeteMetroidvania
 
         protected virtual void SpeedMultiplier()
         {
-            if (SprintingHeld())
+            if (input.SprintingHeld())
             {
                
                 currentSpeed *= sprintMultiplier;
@@ -121,6 +111,11 @@ namespace PeteMetroidvania
             if(character.isCrouching)
             {
                 currentSpeed *= crouchSpeedMultiplier;
+            }
+
+            if(character.isWallsliding)
+            {
+                currentSpeed = 0;
             }
 
             if(!character.isFacingLeft && CollisionCheck(Vector2.right, .05f, jump.collisionLayer) || character.isFacingLeft && CollisionCheck(Vector2.left, .05f, jump.collisionLayer))
