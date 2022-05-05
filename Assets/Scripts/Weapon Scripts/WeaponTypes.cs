@@ -7,7 +7,8 @@ namespace PeteMetroidvania
     public class WeaponTypes : ScriptableObject
     {
         public GameObject projectile;
-        public float projectileSpeed; 
+        public float projectileSpeed;
+        public int amountToPool;
         // Start is called before the first frame update
         void Start()
         {
