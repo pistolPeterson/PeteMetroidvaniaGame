@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
         protected Jump jump;
 
         protected InputManager input;
+        protected ObjectPooler objectPooler;
 
         private Vector2 facingLeft;
 
@@ -44,6 +45,7 @@ public class Character : MonoBehaviour
              jump = GetComponent<Jump>();
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
             input = GetComponent<InputManager>();
+            objectPooler = ObjectPooler.Instance;
     }
 
 

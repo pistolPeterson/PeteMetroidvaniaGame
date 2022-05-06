@@ -11,6 +11,7 @@ namespace PeteMetroidvania
         [SerializeField] protected KeyCode dashHeld;
         [SerializeField] protected KeyCode sprintHeld;
         [SerializeField] protected KeyCode jump;
+        [SerializeField] protected KeyCode weaponFired;
 
         public virtual bool CrouchHeld()
         {
@@ -66,6 +67,20 @@ namespace PeteMetroidvania
                 return false;
             }
         }
+
+
+        public virtual bool WeaponFired()
+        {
+            if (Input.GetKeyDown(weaponFired))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+
+
 
     }
 
