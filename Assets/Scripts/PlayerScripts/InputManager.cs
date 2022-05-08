@@ -50,6 +50,7 @@ namespace PeteMetroidvania
         {
             if (Input.GetKeyDown(jump))
             {
+               
                 return true;
             }
             else
@@ -60,6 +61,7 @@ namespace PeteMetroidvania
         {
             if (Input.GetKey(sprintHeld))
             {
+              
                 return true;
             }
             else
@@ -73,13 +75,14 @@ namespace PeteMetroidvania
         {
             if (Input.GetKeyDown(weaponFired))
             {
+               
                 return true;
             }
             else
                 return false;
         }
 
-
+        
 
 
     }

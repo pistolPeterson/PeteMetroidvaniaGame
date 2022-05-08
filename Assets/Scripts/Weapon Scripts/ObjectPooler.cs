@@ -32,14 +32,37 @@ namespace PeteMetroidvania
                 Destroy(gameObject);
         }
 
-        public void CreatePool(WeaponTypes weapon)
+        public void CreatePool(WeaponTypes weapon, List<GameObject> currentPool, GameObject projectParentFolder)
         {
             for(int i =0; i < weapon.amountToPool; i++)
             {
                 currentItem = Instantiate(weapon.projectile);
+               
                 currentItem.SetActive(false);
+                currentPool.Add(currentItem);
+                currentItem.transform.SetParent(projectParentFolder.transform);
             }
+
+            projectParentFolder.name = weapon.name;
+
         }
+
+        public virtual GameObject GetObject(List<GameObject> currentPool)
+        {
+            for(int i =0; i < currentPool.Count; i++)
+            {
+                if(!currentPool[i].activeInHierarchy)
+                {
+                    return currentPool[i];
+                }
+            }
+
+            return null;
+        }
+
     }
+
+
+
 
 }
