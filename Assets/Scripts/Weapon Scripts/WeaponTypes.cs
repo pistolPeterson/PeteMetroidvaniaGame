@@ -9,6 +9,7 @@ namespace PeteMetroidvania
         public GameObject projectile;
         public float projectileSpeed;
         public int amountToPool;
+        public float lifetime;
         // Start is called before the first frame update
         void Start()
         {
