@@ -23,6 +23,7 @@ public class Character : MonoBehaviour
 
         protected Animator anim;
         protected HorizontalMovement movement;
+        protected AimManager aimManager;
         protected Jump jump;
 
         protected InputManager input;
@@ -46,6 +47,7 @@ public class Character : MonoBehaviour
             facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
             input = GetComponent<InputManager>();
             objectPooler = ObjectPooler.Instance;
+            aimManager = GetComponent<AimManager>();
     }
 
 
