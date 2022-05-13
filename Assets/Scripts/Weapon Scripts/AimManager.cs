@@ -29,12 +29,30 @@ namespace PeteMetroidvania
              
         }
 
+        protected virtual void FixedUpdate()
+        {
+            ChangeArms();
+            bounds.center = origin.position;
+        }
+
         public virtual void ChangeArms()
         {
-            notAimingGun.enabled = !notAimingGun.enabled;
-            aimingGun.enabled = !aimingGun.enabled;
-            aimingLeftHand.enabled = !aimingLeftHand.enabled;   
-            notAimingLeftHand.enabled= !notAimingLeftHand.enabled;
+          if(weapon.currentTimeTillChangeArms > 0)
+            {
+                notAimingGun.enabled = false;
+                notAimingLeftHand.enabled = false;
+                aimingGun.enabled = true;
+                aimingLeftHand.enabled = true;
+            }
+
+            if (weapon.currentTimeTillChangeArms < 0)
+            {
+                notAimingGun.enabled = true;
+                notAimingLeftHand.enabled = true;
+                aimingGun.enabled = false;
+                aimingLeftHand.enabled = false;
+            }
+
         }
 
 

@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
         protected Animator anim;
         protected HorizontalMovement movement;
         protected AimManager aimManager;
+        protected Weapon weapon;
         protected Jump jump;
 
         protected InputManager input;
@@ -48,6 +49,7 @@ public class Character : MonoBehaviour
             input = GetComponent<InputManager>();
             objectPooler = ObjectPooler.Instance;
             aimManager = GetComponent<AimManager>();
+            weapon = GetComponent<Weapon>();
     }
 
 
