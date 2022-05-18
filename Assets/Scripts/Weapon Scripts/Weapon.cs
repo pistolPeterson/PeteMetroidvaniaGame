@@ -8,7 +8,7 @@ namespace PeteMetroidvania
     public class Weapon : Abilities
     {
         [SerializeField] protected List<WeaponTypes> weaponTypes;
-        [SerializeField] protected Transform gunBarrel;
+        [SerializeField] public Transform gunBarrel;
         [SerializeField] protected Transform gunRotation;
 
 
@@ -52,13 +52,31 @@ namespace PeteMetroidvania
 
         protected virtual void PointGun()
         {
-            if(!character.isFacingLeft)
+            if (!aimManager.aiming)
             {
-                aimManager.whereToAim.position = new Vector2(aimManager.bounds.max.x, aimManager.bounds.center.y);
-            }
-            else
-            {
-                aimManager.whereToAim.position = new Vector2(aimManager.bounds.min.x, aimManager.bounds.center.y);
+                if (!character.isFacingLeft)
+                {
+                    if (character.isWallsliding)
+                    {
+                        aimManager.whereToAim.position = new Vector2(aimManager.bounds.min.x, aimManager.bounds.center.y);
+                    }
+                    else
+                    {
+                        aimManager.whereToAim.position = new Vector2(aimManager.bounds.max.x, aimManager.bounds.center.y);
+                    }
+
+                }
+                else
+                {
+                    if (character.isWallsliding)
+                    {
+                        aimManager.whereToAim.position = new Vector2(aimManager.bounds.max.x, aimManager.bounds.center.y);
+                    }
+                    else
+                    {
+                        aimManager.whereToAim.position = new Vector2(aimManager.bounds.min.x, aimManager.bounds.center.y);
+                    }
+                }
             }
             aimManager.aimingGun.transform.GetChild(0).position = aimManager.whereToAim.position;
             aimManager.aimingLeftHand.transform.GetChild(0).position = aimManager.whereToPlaceHand.position;
@@ -73,6 +91,7 @@ namespace PeteMetroidvania
         protected virtual void FireWeapon()
         {
             currentTimeTillChangeArms = currentWeapon.lifetime;
+            aimManager.ChangeArms();
             currentProjectile = objectPooler.GetObject(currentPool);
             if(currentProjectile != null)
             {

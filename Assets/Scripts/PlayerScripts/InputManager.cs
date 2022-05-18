@@ -13,6 +13,13 @@ namespace PeteMetroidvania
         [SerializeField] protected KeyCode jump;
         [SerializeField] protected KeyCode weaponFired;
 
+        [SerializeField] protected KeyCode upHeld;
+        [SerializeField] protected KeyCode downHeld;
+        [SerializeField] protected KeyCode tiltedUpheld;
+        [SerializeField] protected KeyCode tiltedDownheld;
+
+        [SerializeField] protected KeyCode aimingHeld;
+
         public virtual bool CrouchHeld()
         {
             if (Input.GetKey(crouchHeld))
@@ -82,7 +89,70 @@ namespace PeteMetroidvania
                 return false;
         }
 
-        
+
+
+
+
+
+
+
+
+        public virtual bool UpHeld()
+        {
+            if (Input.GetKey(upHeld))
+            {
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+
+        public virtual bool DownHeld()
+        {
+            if (Input.GetKey(downHeld))
+            {
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public virtual bool TiltedDownHeld()
+        {
+            if (Input.GetKey(tiltedDownheld))
+            {
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public virtual bool TiltedUpHeld()
+        {
+            if (Input.GetKey(tiltedUpheld))
+            {
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public virtual bool AimingHeld()
+        {
+            if (Input.GetKey(aimingHeld))
+            {
+
+                return true;
+            }
+            else
+                return false;
+        }
+
 
 
     }
