@@ -10,6 +10,8 @@ namespace PeteMetroidvania
         public float projectileSpeed;
         public int amountToPool;
         public float lifetime;
+        public bool automatic;
+        public float timeBetweenShots; 
         // Start is called before the first frame update
         void Start()
         {

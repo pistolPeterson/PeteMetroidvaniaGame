@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,8 @@ namespace PeteMetroidvania
         public WeaponTypes currentWeapon;
         public float currentTimeTillChangeArms; 
 
-        private GameObject projectileParentFolder; 
+        private GameObject projectileParentFolder;
+        private float currentTimeBetweenShots;
 
         protected override void Initialization()
         {
@@ -48,6 +50,31 @@ namespace PeteMetroidvania
         {
             PointGun();
             NegateTimeTillChangeArms();
+            FireWeaponHeld();
+        }
+
+        protected virtual  void FireWeaponHeld()
+        {
+           if(input.WeaponFiredHeld())
+            {
+                if(currentWeapon.automatic)
+                {
+                    Debug.Log("current weapon is automatic");
+                    currentTimeTillChangeArms = currentWeapon.lifetime;
+                    aimManager.ChangeArms();
+                    currentTimeBetweenShots -= Time.deltaTime;
+                    if(currentTimeBetweenShots < 0)
+                    {
+                        currentProjectile = objectPooler.GetObject(currentPool);
+                        if (currentProjectile != null)
+                        {
+                            Invoke("PlaceProjectile", .1f);
+                        }
+
+                        currentTimeBetweenShots = currentWeapon.timeBetweenShots;
+                    }
+                }
+            }
         }
 
         protected virtual void PointGun()
@@ -97,6 +124,7 @@ namespace PeteMetroidvania
             {
                 Invoke("PlaceProjectile", .1f);
             }
+            currentTimeBetweenShots = currentWeapon.timeBetweenShots;
         }
 
         protected virtual void PlaceProjectile()

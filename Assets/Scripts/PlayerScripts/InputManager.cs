@@ -108,6 +108,18 @@ namespace PeteMetroidvania
                 return false;
         }
 
+        public virtual bool WeaponFiredHeld()
+        {
+            if (Input.GetKey(weaponFired))
+            {
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+
 
         public virtual bool DownHeld()
         {
